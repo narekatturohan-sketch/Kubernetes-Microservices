@@ -2,31 +2,35 @@ version: "3.9"
 
 services:
   validation:
-    build: ./services/validation
-    container_name: validation
+    context: ./services
+    dockerfile: Dockerfile.validation
     ports:
       - "8001:8001"
 
   rule-engine:
-    build: ./services/rule_engine
+    context: ./services
+    dockerfile: Dockerfile.rule_engine
     container_name: rule-engine
     ports:
       - "8002:8002"
 
   etl:
-    build: ./services/etl
+    context: ./services
+    dockerfile: Dockerfile.etl
     container_name: etl
     ports:
       - "8003:8003"
 
   automation:
-    build: ./services/automation
+    context: ./services
+    dockerfile: Dockerfile.automation
     container_name: automation
     ports:
       - "8004:8004"
 
   gateway:
-    build: ./services/gateway
+    context: ./services
+    dockerfile: Dockerfile.gateway
     container_name: gateway
     ports:
       - "8000:8000"
@@ -37,7 +41,8 @@ services:
       - automation
 
   dashboard:
-    build: ./services/dashboard
+    context: ./services/dashboard
+    dockerfile: Dockerfile
     container_name: dashboard
     ports:
       - "8005:8005"
