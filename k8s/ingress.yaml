@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+spec:
+  rules:
+  - host: myservices.local
+    http:
+      paths:
+      - path: /validate
+        pathType: Prefix
+        backend:
+          service:
+            name: validation-service
+            port:
+              number: 8001
+      - path: /rule
+        pathType: Prefix
+        backend:
+          service:
+            name: rule-engine-service
+            port:
+              number: 8002
+      - path: /etl
+        pathType: Prefix
+        backend:
+          service:
+            name: etl-service
+            port:
+              number: 8003
+      - path: /automation
+        pathType: Prefix
+        backend:
+          service:
+            name: automation-service
+            port:
+              number: 8004
+      - path: /dashboard
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard-service
+            port:
+              number: 8005
