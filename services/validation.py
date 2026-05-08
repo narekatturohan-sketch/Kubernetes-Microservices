@@ -1,7 +1,10 @@
 from fastapi import FastAPI, HTTPException
 import re
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Validation API")
+
+Instrumentator().instrument(app).expose(app)
 
 @app.post("/validate/pan")
 def validate_pan(value: str):

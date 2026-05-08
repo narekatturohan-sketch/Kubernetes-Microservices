@@ -2,8 +2,11 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 import plotly.express as px
 import pandas as pd
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Dashboard Service")
+
+Instrumentator().instrument(app).expose(app)
 
 @app.get("/", response_class=HTMLResponse)
 def dashboard():

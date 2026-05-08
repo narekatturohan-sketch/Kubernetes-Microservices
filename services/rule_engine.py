@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Rule Engine")
+
+Instrumentator().instrument(app).expose(app)
 
 @app.post("/rule/check")
 def check_rule(amount: float):
