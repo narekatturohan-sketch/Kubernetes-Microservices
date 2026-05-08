@@ -2,11 +2,14 @@ from fastapi import FastAPI
 import shutil
 import os
 from datetime import datetime
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Automation Service")
 
 WATCH_DIR = "logs/"
 BACKUP_DIR = "backups/"
+
+Instrumentator().instrument(app).expose(app)
 
 @app.post("/automation/backup")
 def run_backup():

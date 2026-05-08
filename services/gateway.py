@@ -1,7 +1,10 @@
 from fastapi import FastAPI, HTTPException
 import requests
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="API Gateway")
+
+Instrumentator().instrument(app).expose(app)
 
 services = {
     "validation": "http://validation:8001",

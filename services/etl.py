@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 import pandas as pd
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="ETL Service")
+
+Instrumentator().instrument(app).expose(app)
 
 @app.post("/etl/run")
 def run_etl():
